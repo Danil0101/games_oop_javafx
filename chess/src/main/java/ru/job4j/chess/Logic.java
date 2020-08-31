@@ -31,6 +31,11 @@ public class Logic {
     }
 
     private boolean isFree(Cell[] steps) {
+        for (Figure figure : figures) {
+            if (Arrays.binarySearch(steps, figure.position()) >= 0) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -39,7 +44,7 @@ public class Logic {
         this.index = 0;
     }
 
-    private int findBy(Cell cell) throws FigureNotFoundException {
+    protected int findBy(Cell cell) throws FigureNotFoundException {
         for (int index = 0; index != this.figures.length; index++) {
             if (this.figures[index] != null && this.figures[index].position().equals(cell)) {
                 return index;
